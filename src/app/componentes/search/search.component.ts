@@ -19,13 +19,7 @@ export class SearchComponent implements OnInit {
     }
 
     this._spotify.getArtistas(this.termino)
-      .subscribe( artistas =>{
-          console.log('Recibido de spotify.service:');
-          console.log(artistas);
-        },
-        error => {
-          console.log('Se ha producido un error en el servicio:' +  JSON.stringify(error.error.error.message));
-        });
+      .subscribe();
   }
 
   ngOnInit() {
