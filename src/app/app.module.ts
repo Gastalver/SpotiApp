@@ -9,6 +9,10 @@ import { SearchComponent } from './componentes/search/search.component';
 import { NavbarComponent } from './componentes/shared/navbar/navbar.component';
 import { SpotifyService } from "./servicios/spotify.service";
 import { HttpClientModule} from "@angular/common/http";
+import { FormsModule} from "@angular/forms";
+import { SinfotoPipe } from './pipes/sinfoto.pipe';
+import { ArtistComponent } from './componentes/artist/artist.component';
+
 
 
 @NgModule({
@@ -16,13 +20,16 @@ import { HttpClientModule} from "@angular/common/http";
     AppComponent,
     HomeComponent,
     SearchComponent,
-    NavbarComponent
+    NavbarComponent,
+    SinfotoPipe,
+    ArtistComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [NgbCarouselConfig,SpotifyService],
   bootstrap: [AppComponent]

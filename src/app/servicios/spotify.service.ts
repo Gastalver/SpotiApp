@@ -1,26 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from "@angular/common/http"; // Servicio
 import { HttpHeaders} from "@angular/common/http";
-import { map } from 'rxjs/operators';
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/operator/map';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyService {
-
+  public artistas:string[]=[];
   constructor(public http: HttpClient) {
-    console.log('Servicio Spotify listo')
+    // console.log('Servicio Spotify listo')
   }
 
-  getArtistas(){
-    let url = 'https://api.spotify.com/v1/search?query=metallica&type=album&offset=0&limit=20';
+  getArtistas(termino:string){
+    let url = `https://api.spotify.com/v1/search?query=${termino}&type=artist&offset=0&limit=20`;
     let headers = new HttpHeaders(
       {
-        'authorization': 'Bearer BQCdeG8K_WKqUVCRLtH79eoOXwWAITF87RpaCkKpzQJZWYXYqbMzteb_Q6NWQozprL6g5aFCoFdXF_7L-CI'
+        'authorization': 'Bearer BQAfomHnVsgyrgTi4Z4QMYxnBR-pdNfMJ9vsKdA-08cZ9T9uvnZbK1sqwdqEr_dxDOCWSjO0Uph2vqdopSw'
       });
-
-      return this.http.get(url, { headers }).map(resultado =>{
-            return 'Hola';
-        })
-      };
+    return  this.http.get(url, { headers }).map((resultados:any) => {
+      this.artistas = resultados.artists.items;
+      return this.artistas;
+    });
+  };
 }

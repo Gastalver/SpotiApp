@@ -7,13 +7,25 @@ import { SpotifyService} from "../../servicios/spotify.service";
   styles: []
 })
 export class SearchComponent implements OnInit {
+  public termino: string ='';
 
   constructor( public _spotify: SpotifyService) {
-    this._spotify.getArtistas()
-      .subscribe( resp =>{
-      console.log('Información lista');
-      console.log(resp);
-    });
+
+  };
+  public buscarArtista(){
+
+    if (this.termino.length ==0) {
+      return;
+    }
+
+    this._spotify.getArtistas(this.termino)
+      .subscribe( artistas =>{
+          console.log('Recibido de spotify.service:');
+          console.log(artistas);
+        },
+        error => {
+          console.log('Se ha producido un error en el servicio:' +  JSON.stringify(error.error.error.message));
+        });
   }
 
   ngOnInit() {
