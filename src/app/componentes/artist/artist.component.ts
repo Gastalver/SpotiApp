@@ -8,7 +8,7 @@ import {SpotifyService} from "../../servicios/spotify.service";
   styles: []
 })
 export class ArtistComponent implements OnInit {
-  // public id:string
+  public artista:any = {};
   constructor(private _activatedRoute:ActivatedRoute,
               public _spotifyService:SpotifyService) {
   }
@@ -17,7 +17,8 @@ export class ArtistComponent implements OnInit {
     this._activatedRoute.params
       .map((params)=>params['id'])
       .subscribe((id)=>{
-        console.log('Recibido el parámetro: ' + id);
+        this._spotifyService.getArtista(id).subscribe();
+        this._spotifyService.getTopTracks(id).subscribe();
     })
   }
 
